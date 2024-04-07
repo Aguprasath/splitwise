@@ -1,0 +1,21 @@
+
+<%= form_for(@settlement) do |f| %>
+  <div class="field">
+    <%= f.hidden_field :expense_split_id, value: @expense_split_id %>
+  </div>
+
+  <div class="field">
+    <%= f.hidden_field :user_id, value: @user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :amount, "Amount Paid" %>
+    <%= f.number_field :amount %>
+
+  </div>
+  <div class="field">
+    <%= f.label :notes %>
+    <%= f.text_area :notes %>
+  </div>
+
+  <%= f.submit "Create Settlement" %>
+<% end %>

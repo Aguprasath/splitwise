@@ -1,0 +1,16 @@
+
+<div class="container-fluid"><br>
+  <h2>List of Friends</h2>
+
+  <div id="container-fluid">
+    <%@users.each do |user| %>
+      <%if current_user.id!=user.id %>
+        <%=render 'user/user',user: user %>
+        <%=link_to 'View Expenses with '+user.username,expenses_with_friend_expenses_path(user),class: "btn btn-primary" %>
+        <br><br>
+
+      <%end %>
+    <% end %>
+  </div>
+
+</div>

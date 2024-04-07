@@ -1,0 +1,57 @@
+
+<%= form_with(model: @expense, local: true, class: "needs-validation", novalidate: true) do |form| %>
+  <% if @expense.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expense.errors.count, "error") %> prohibited this expense from being saved:</h2>
+
+      <ul>
+        <% @expense.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_field :description, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :amount, class: "form-label" %>
+    <%= form.number_field :amount, class: "form-control", step: '0.01', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :paid_by, 'Paid By', class: "form-label" %>
+    <%= form.collection_select :user_id, User.all, :id, :username, { prompt: "Select User" }, { class: "form-select", required: true } %>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Split With:</label>
+    <div class="form-check">
+      <%= radio_button_tag 'split_type', 'equal', checked: true, class: "form-check-input" %>
+      <%= label_tag 'equal', 'Equal Split', class: "form-check-label" %>
+    </div>
+    <div class="form-check">
+      <%= radio_button_tag 'split_type', 'unequal', class: "form-check-input" %>
+      <%= label_tag 'unequal', 'Unequal Split', class: "form-check-label" %>
+    </div>
+  </div>
+
+  <div class="mb-3" id="users-select">
+    <label class="form-label">Choose splitter & enter split Amounts(for Unequal split).</label>
+    <% User.all.each do |user| %>
+      <div class="form-check">
+        <%= check_box_tag 'expense[user_ids][]', user.id, false, class: "form-check-input", required: true, data: { "bs-target": "##{user.id}_validation" } %>
+        <%= label_tag "split_amount[#{user.id}]", user.username, class: "form-check-label" %>
+        <%= text_field_tag "split_amount[#{user.id}]", nil, placeholder: 'Split Amount', class: 'form-control split-amount', required: true, data: { "bs-target": "##{user.id}_validation" } %>
+        <div id="<%= "#{user.id}_validation" %>" class="invalid-feedback">Please select a splitter and enter the split amount.</div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Submit", class: "btn btn-primary" %>
+  </div>
+ <%end %>

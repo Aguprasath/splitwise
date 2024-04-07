@@ -1,0 +1,8 @@
+
+  <td><%= expense.description %></td>
+  <td><%= expense.created_at.strftime('%m/%d/%Y') %></td>
+  <td><%= expense.amount %></td>
+  <td><%= expense_split.amount %></td>
+  <td><%= expense_split.paid_status==false ? "Not Paid" : "Paid" %></td>
+
+

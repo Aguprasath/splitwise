@@ -1,0 +1,33 @@
+
+
+
+<% if @expenses_owe.present?  %>
+  <br>
+  <h1>Expenses you owe</h1>
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Description</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Divided amount</th>
+      <th>Paid status</th>
+      <th>Paid by</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <% @expenses_owe.each do |expense_split| %>
+      <%=render 'expense', expense: expense_split.expense,expense_split: expense_split,current_user: current_user%>
+        <td><%= expense_split.expense.user.username==current_user.username ? "You" : expense_split.expense.user.username %></td>
+        <td><%=link_to 'Settle',new_settlement_path(amount: expense_split.amount,expense_split_id: expense_split,user_id: current_user.id),class: "btn btn-primary" if (expense_split.user.username==current_user.username and expense_split.paid_status==false ) %></td>
+
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+<%else %>
+  <h2> No Expenses you owe</h2>
+<%end %>
+<%=link_to 'Back',expenses_path,class: "btn btn-primary" %>

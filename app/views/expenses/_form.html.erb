@@ -40,16 +40,18 @@
   </div>
 
   <div class="mb-3" id="users-select">
-    <label class="form-label">Choose splitter & enter split Amounts(for Unequal split).</label>
+    <label class="form-label">Choose splitter (Don't pick payer) & enter split Amounts(for Unequal split).</label>
     <% User.all.each do |user| %>
       <div class="form-check">
-        <%= check_box_tag 'expense[user_ids][]', user.id, false, class: "form-check-input", required: true, data: { "bs-target": "##{user.id}_validation" } %>
+        <%= check_box_tag 'expense[user_ids][]', user.id, false, class: "form-check-input", data: { "bs-target": "##{user.id}_validation" } %>
         <%= label_tag "split_amount[#{user.id}]", user.username, class: "form-check-label" %>
-        <%= text_field_tag "split_amount[#{user.id}]", nil, placeholder: 'Split Amount', class: 'form-control split-amount', required: true, data: { "bs-target": "##{user.id}_validation" } %>
+        <%= text_field_tag "split_amount[#{user.id}]", nil, placeholder: 'Split Amount', class: 'form-control split-amount', data: { "bs-target": "##{user.id}_validation" } %>
         <div id="<%= "#{user.id}_validation" %>" class="invalid-feedback">Please select a splitter and enter the split amount.</div>
       </div>
     <% end %>
   </div>
+
+
 
   <div class="mb-3">
     <%= form.submit "Submit", class: "btn btn-primary" %>

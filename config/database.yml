@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: Splitwise_production
-  username: Splitwise
-  password: <%= ENV["SPLITWISE_DATABASE_PASSWORD"] %>
+  database: splitwise
+  username: splitwise
+  password: <%= ENV["DATABASE_PASSWORD"] %>

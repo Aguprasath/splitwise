@@ -101,6 +101,7 @@ GEM
       warden (~> 1.2.3)
     erubi (1.12.0)
     execjs (2.9.1)
+    ffi (1.15.5)
     ffi (1.15.5-x86-mingw32)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -143,7 +144,10 @@ GEM
     nio4r (2.7.1)
     nokogiri (1.15.6-x86-mingw32)
       racc (~> 1.4)
+    nokogiri (1.15.6-x86_64-linux)
+      racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.5.6)
     pg (1.5.6-x86-mingw32)
     popper_js (2.11.8)
     psych (5.1.2)
@@ -248,6 +252,7 @@ GEM
 
 PLATFORMS
   x86-mingw32
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap

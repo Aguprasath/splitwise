@@ -5,7 +5,7 @@ class ExpenseSplit < ApplicationRecord
 
 
   scope :amount_owe_to_current_user, ->(current_user_id){
-    where("user_id=:current_user_id",current_user_id: current_user_id).sum("amount")
+    where("user_id=:current_user_id AND paid_status = false",current_user_id: current_user_id).sum("amount")
   }
 
   scope :expenses_owe_to_current_user, ->(current_user_id){
